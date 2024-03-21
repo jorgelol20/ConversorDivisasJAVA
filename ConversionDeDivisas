@@ -1,0 +1,183 @@
+import javax.swing.*;
+import java.text.DecimalFormat;
+
+public class ConversionDeDivisas {
+    public static void main (String[] args){
+        DecimalFormat df = new DecimalFormat("#.00");
+        //Declaración de las arrays
+        String[] opciones = {"€", "¥", "$", "£"};
+        String[] opciones1 = {"¥", "$", "£"};
+        String[] opciones2 = {"€", "$", "£"};
+        String[] opciones3 = {"€", "¥", "£"};
+        String[] opciones4 = {"€", "¥", "$"};
+        //Menús de selección
+        //DIVISA QUE QUIERO TRANSFORMAR A OTRA
+        int opcion = JOptionPane.showOptionDialog(null,"¿Qué divisa tiene usted?","Programa de JCA", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, opciones, null);
+        //ADVERTENCIA SOBRE LOS DECIMALES
+        JOptionPane.showMessageDialog(null,"Si desea utilizar números decimales, separelos con '.' y no con ','", "IMPORTANTE", JOptionPane.WARNING_MESSAGE, null);
+        //MENU DE ELECCION PARA PASAR EUROS A OTRA DIVISA
+        if (opcion==0) {
+            int opcion1 = JOptionPane.showOptionDialog(null, "¿A qué divisa quiere hacer el cambio?", "Cambio de € a", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones1, null);
+            if (opcion1==0){
+                JOptionPane.showMessageDialog(null, ("€ equivalen a "+df.format(euro1())+"¥"));
+            }
+            if (opcion1==1){
+                JOptionPane.showMessageDialog(null, ("€ equivalen a "+df.format(euro2())+"$"));
+            }
+            if (opcion1==2){
+                JOptionPane.showMessageDialog(null, ("€ equivalen a "+df.format(euro3())+"£"));
+            }
+        }
+        //MENU DE ELECCION PARA PASAR YENES A OTRA DIVISA
+        if (opcion==1) {
+            int opcion2 = JOptionPane.showOptionDialog(null, "¿A qué divisa quiere hacer el cambio?", "Cambio de ¥ a", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones2, null);
+            if (opcion2==0){
+                JOptionPane.showMessageDialog(null, ("¥ equivalen a "+df.format(yen1())+"€"));
+            }
+            if (opcion2==1){
+                JOptionPane.showMessageDialog(null, ("¥ equivalen a "+df.format(yen2())+"$"));
+            }
+            if (opcion2==2){
+                JOptionPane.showMessageDialog(null, ("¥ equivalen a "+df.format(yen3())+"£"));
+            }
+        }
+        //MENU DE ELECCION PARA PASAR DOLARES A OTRA DIVISA
+        if (opcion==2) {
+            int opcion3 = JOptionPane.showOptionDialog(null, "¿A qué divisa quiere hacer el cambio?", "Cambio de $ a", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones3, null);
+            if (opcion3==0){
+                JOptionPane.showMessageDialog(null, ("$ equivalen a "+df.format(dolar1())+"€"));
+            }
+            if (opcion3==1){
+                JOptionPane.showMessageDialog(null, ("$ equivalen a "+df.format(dolar2())+"¥"));
+            }
+            if (opcion3==2){
+                JOptionPane.showMessageDialog(null, ("$ equivalen a "+df.format(dolar3())+"£"));
+            }
+        }
+        //MENU DE ELECCION PARA PASAR LIBRAS A OTRA DIVISA
+        if (opcion==3) {
+            int opcion4 = JOptionPane.showOptionDialog(null, "¿A qué divisa quiere hacer el cambio?", "Cambio de £ a", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones4, null);
+            if (opcion4==0){
+                JOptionPane.showMessageDialog(null, ("£ equivalen a "+df.format(libra1())+"€"));
+            }
+            if (opcion4==1){
+                JOptionPane.showMessageDialog(null, ("£ equivalen a "+df.format(libra2())+"¥"));
+            }
+            if (opcion4==2){
+                JOptionPane.showMessageDialog(null, ("£ equivalen a "+df.format(libra3())+"$"));
+            }
+        }
+        System.exit(0);
+    }
+    //Funciones para el apartado euros
+    //Pasa de euros a yenes
+    private static double euro1(){
+        double resultado;
+            String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+            double saldo = Double.parseDouble(num1);
+            resultado = saldo * 129.852;
+        return resultado;
+    }
+    //Pasa de euros a dolares
+    private static double euro2(){
+        double resultado;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo = Double.parseDouble(num1);
+        resultado = saldo * 1.28611;
+        return resultado;
+    }
+    //Pasa de euros a libras
+    private static double euro3(){
+        double resultado;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo = Double.parseDouble(num1);
+        resultado = saldo * 0.86;
+        return resultado;
+    }
+    //Funciones para el apartado yenes
+    //Pasa de yenes a euros
+    private static double yen1(){
+        double resultado;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo = Double.parseDouble(num1);
+        resultado = saldo / 129.852;
+        return resultado;
+    }
+    //Pasa de yenes a euros y lo pasa a dolares
+    private static double yen2(){
+        double resultado1;
+        double resultado2;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        double saldo2 = saldo1 / 129.852;
+        resultado2 = saldo2 * 1.28611;
+        return resultado2;
+    }
+    //Pasa de yenes a euros y lo pasa a libras
+    private static double yen3(){
+        double resultado;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        double saldo2 = saldo1 / 129.852;
+        resultado = saldo2 * 0.86;
+        return resultado;
+    }
+    //Funciones para el apartado dolares
+    //Pasa de dolares a euros
+    private static double dolar1(){
+        double resultado;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        resultado = saldo1 / 1.28611;
+        return resultado;
+    }
+    //Pasa de dolares a euros y hace el cambio a yenes
+    private static double dolar2(){
+        double resultado1;
+        double resultado2;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        resultado1 = saldo1 / 1.28611;
+        resultado2 = resultado1 * 129.852;
+        return resultado2;
+    }
+    //Pasa de dolares a euros y hace el cambio a libras
+    private static double dolar3(){
+        double resultado1;
+        double resultado2;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        resultado1 = saldo1 / 1.28611;
+        resultado2 = resultado1 * 0.86;
+        return resultado2;
+    }
+    //Funciones para el apartado libras
+    //De libras a euros
+    private static double libra1(){
+        double resultado;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        resultado = saldo1 / 0.86;
+        return resultado;
+    }
+    //Pasa de libras a euros y hace el cambio a yenes
+    private static double libra2(){
+        double resultado1;
+        double resultado2;
+        String num1=JOptionPane.showInputDialog(null,"Indique su saldo:","Cantidad",JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        resultado1 = saldo1 / 0.86;
+        resultado2 = resultado1 * 129.852;
+        return resultado2;
+    }
+    //Pasa de libras a euros y hace el cambio a dolares
+    private static double libra3() {
+        double resultado1;
+        double resultado2;
+        String num1 = JOptionPane.showInputDialog(null, "Indique su saldo:", "Cantidad", JOptionPane.INFORMATION_MESSAGE);
+        double saldo1 = Double.parseDouble(num1);
+        resultado1 = saldo1 / 0.86;
+        resultado2 = resultado1 * 1.28611;
+        return resultado2;
+    }
+}
